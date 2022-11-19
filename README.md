@@ -3,6 +3,7 @@ Repositório com projetos criados na DIO.ME
 
 InfraStructure As A Code:
 Infraestrutura como Código: Script de Criação de Estrutura de Usuários, Diretórios e Permissões
+ServerSer: Configura um server web, apache, com uma instancia do meu portifolio.
 
 Orbi Bootcamp
 Empresa de desenvolvimento de jogos. Alguns projetos (Em Javascript) foram realizados nesse bootcamp:
