@@ -1,0 +1,81 @@
+
+No ubuntu:
+https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
+
+Install using the convenience script:
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+DRY_RUN=1 sudo sh ./get-docker.sh
+
+docker run -it IMAGE:
+Carrega um terminal com a imagem
+-d: executa em background
+docker exec -it CONTAINERID /bin/bash
+Executa o terminal num container em background
+docker exec -it CONTAINERID COMANDO
+funciona também.
+
+--name NOMEDAINSTANCIA
+docker stop CONTAINERID: Encerra container
+docker rm CONTAINERID: Exclui
+Estudar estrutura Clone - Build - Run - Share
+
+docker images #lista imagens
+docker container run
+Executa container
+
+docker cp arquivo.ext INSTANCIA:/destino ou
+docker cp INSTANCIA:/origem/arquivo.ext /destino.ext
+
+mysql
+docker pull mysql
+docker run -e MYSQL_ROOT_PASSWORD=SENHA --name INSTANCIAMYSQL -d -p 3306:3306 mysql
+docker exec -it INSTANCIAMYSQL bash
+systemctl start mysql
+mysql -u root -p --protocol=tcp
+
+--volume=/diretorio(:/destino) 
+--mount type=bind,src=/origem,dst=/data(,ro para somente leitura)
+#monta diretorios pra salvar
+
+docker volume create NOME #Cria um volume na pasta padrão do docker
+-mount type=volume,src=NOME,dst=/data
+
+docker volume prune (limpa todos volumes não em uso no host)
+docker container prune (limpa todos containers não executando)
+
+docker pull httpd (Docker do apache)
+docker run --name InstanciaApache -d -p 80:80 --volume=/meuprojeto:/usr/local/apache2/htdocs httpd
+
+docker stats NOME #detalhes de uso de hardware
+docker update NOME -m QTD_MEMORIA(120M) --cpus PCT_USO(0.3)
+
+stress --cpu 1 --vm-bytes 50m --vm 1 --vm-bytes 50m # Função de teste de stress para container
+
+docker logs INSTANCIA # logs do container
+docker container top INSTANCIA # processos no container
+docker info # informações sobre o docker server
+docker network # configura a rede docker
+... create REDE # cria uma rede
+
+docker run ... --network REDE ...
+
+docker build . -t NOMEDAIMAGEM #constroi uma imagem personalizada à partir de um arquivo "dockerfile" (tem um na pasta de exemplo)
+
+alpine linux (linux que pesa 5m)
+
+Estudar Dockerfile Multistage 
+(from debian as stage1
+...
+COPY --from stage1)
+
+adminer # sgbd para docker
+registry # imagem que serve para armazenar imagens
+docker run -d -p 5000:5000 --restart=always --name NOME registry
+
+/etc/docker/daemon.json {"insecure-registration":["ip:porta"]}
+
+docker compose: utiliza um arquivo YAML para criar multiplos serviços com uma execução. Indica porta, volumes, variáveis de ambiente, redes, etc
+https://docs.docker.com/compose/gettingstarted/
+docker compose up -d # inicia o containerconforme o YAML
+docker compose down #finaliza o container
