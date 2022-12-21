@@ -1,0 +1,10 @@
+talvez seja necessário usar:
+vagrant up --provider=hyperv
+para listar boxes instalados para o virtualizador utilizado:
+vagrant box list
+Para verificar nome de boxes
+https://app.vagrantup.com/boxes/search
+para baixar boxes
+vagrant box add
+
+Vagrant não funciona muito bem com o Hyperv. Melhor usar VirtualBox

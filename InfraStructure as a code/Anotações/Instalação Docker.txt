@@ -4,6 +4,7 @@ https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-scr
 
 Install using the convenience script:
 
+
 curl -fsSL https://get.docker.com -o get-docker.sh
 DRY_RUN=1 sudo sh ./get-docker.sh
 
@@ -79,3 +80,23 @@ docker compose: utiliza um arquivo YAML para criar multiplos serviços com uma e
 https://docs.docker.com/compose/gettingstarted/
 docker compose up -d # inicia o containerconforme o YAML
 docker compose down #finaliza o container
+
+melhor rotina:
+Baixar imagem > Criar o dockerfile > criar imagem personalizada > subir para o hub > criar compose
+
+
+-------------
+Docker Swarm # cluster
+Possui nós gerenciadores e nós de trabalho
+exige que mais que 50% dos nós gerenciadores estejam online.
+Um cluster gerenciador pode ser um cluster de trabalho
+
+docker swarm init # inicializa cluster
+docker swarm join # ingressa cluster
+docker node ls # lista membros do cluster
+
+vagrant # programa que serve pra gerenciar vms e facilitar a criação de clusters de VMs em máquians locais https://www.vagrantup.com/
+
+docker service create --name NOME --replicas x -p 80:80 NOMEIMAGEM # Cria serviço em cluster
+docker node update --availability drain NOMEDOSERVER # remove todos os containers e não permite que continue no server citado, enviando ele para os outros workers do cluster. drain para não permitir, active para ativar e pause para deixar somente containers que já estão lá.
+Pesquisar: Cluster fora da mesma rede?
